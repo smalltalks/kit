@@ -1,2 +1,3 @@
 #!/bin/sh
-go run "$GOPATH/src/github.com/smalltalks/kit/main.go" "$@"
+export KIT_DIR="$GOPATH/src/github.com/smalltalks/kit"
+go run "$KIT_DIR/main.go" "$@"

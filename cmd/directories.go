@@ -1,4 +1,4 @@
-package directories
+package cmd
 
 import (
 	"fmt"
@@ -11,14 +11,11 @@ const (
 	rootDirectoryEnv = "KIT_DIR"
 )
 
-var (
-	// Root is Kit root directory
-	Root string
-	// Bin is Kit bin directory
-	Bin string
-	// Scripts is Kit scripts directory
-	Scripts string
-)
+var directories = struct {
+	root    string
+	bin     string
+	scripts string
+}{}
 
 func getRootDirectory() string {
 	dir, ok := os.LookupEnv(rootDirectoryEnv)
@@ -39,7 +36,7 @@ func getRootDirectory() string {
 }
 
 func init() {
-	Root = getRootDirectory()
-	Bin = filepath.Join(Root, "bin")
-	Scripts = filepath.Join(Root, "scripts")
+	directories.root = getRootDirectory()
+	directories.bin = filepath.Join(directories.root, "bin")
+	directories.scripts = filepath.Join(directories.root, "scripts")
 }

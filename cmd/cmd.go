@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"os/exec"
 
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
@@ -23,6 +24,13 @@ func description(s string) string {
 	return fmt.Sprintf("%s\n%s", banner, s)
 }
 
+func shell(command string, args ...string) error {
+	cmd := exec.Command(command, args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
+}
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:  "kit",
@@ -33,12 +41,13 @@ var rootCmd = &cobra.Command{
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
 		os.Exit(1)
 	}
 }
 
 func init() {
-	rootCmd.AddCommand(runtimeCmd)
-	rootCmd.AddCommand(versionCmd)
+	cobra.EnableCommandSorting = false
+	rootCmd.AddCommand(createCmd)
+	rootCmd.AddCommand(generateCmd)
+	rootCmd.AddCommand(installCmd)
 }
