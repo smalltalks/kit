@@ -1,2 +1,2 @@
 # kit
-**kit** is the development tool-kit at Smalltalks
+**kit** is the development tool-kit at SmallTalks
