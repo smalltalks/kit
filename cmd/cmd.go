@@ -1,40 +1,26 @@
 package cmd
 
 import (
-	"fmt"
 	"os"
-	"os/exec"
 
-	"github.com/fatih/color"
+	kitdirectories "github.com/smalltalks/kit/cmd/common/directories"
+	"github.com/smalltalks/kit/cmd/common/meta"
+	"github.com/smalltalks/kit/cmd/project"
+	"github.com/smalltalks/kit/cmd/script"
 	"github.com/spf13/cobra"
 )
 
-var version = "v0.0.1-alpha"
-var banner = color.BlueString(`
-   ___  __    ___  _________
-  |\  \|\  \ |\  \|\___   ___\
-  \ \  \/  /|\ \  \|___ \  \_|
-   \ \   ___  \ \  \   \ \  \
-    \ \  \\ \  \ \  \   \ \  \
-     \ \__\\ \__\ \__\   \ \__\
-      \|__| \|__|\|__|    \|__|  %s
-`, version)
-
-func description(s string) string {
-	return fmt.Sprintf("%s\n%s", banner, s)
-}
-
-func shell(command string, args ...string) error {
-	cmd := exec.Command(command, args...)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	return cmd.Run()
-}
+var (
+	version     = meta.GetVersion()
+	banner      = meta.GetBanner()
+	directories = kitdirectories.Get()
+)
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:  "kit",
-	Long: description("Development tool-kit"),
+	Use:   "kit",
+	Short: "SmallTalks development tool-kit",
+	Long:  banner.Description("SmallTalks development tool-kit"),
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -47,10 +33,6 @@ func Execute() {
 
 func init() {
 	cobra.EnableCommandSorting = false
-	rootCmd.AddCommand(createCmd)
-	rootCmd.AddCommand(generateCmd)
-	rootCmd.AddCommand(installCmd)
-
-	// Internal commands
-	rootCmd.AddCommand(docsCmd)
+	rootCmd.AddCommand(project.Command())
+	rootCmd.AddCommand(script.Command())
 }
