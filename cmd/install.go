@@ -12,8 +12,23 @@ var installCmd = &cobra.Command{
 	Short: "Install kit dependencies",
 	Long:  description("Install kit dependencies"),
 	Run: func(cmd *cobra.Command, args []string) {
-		if ok, _ := cmd.Flags().GetBool("local-tools"); ok {
+		installLocalTools, err := cmd.LocalFlags().GetBool("local-tools")
+		if err != nil {
+			panic(err)
+		}
+
+		installCITools, err := cmd.LocalFlags().GetBool("ci-tools")
+		if err != nil {
+			panic(err)
+		}
+
+		if installLocalTools {
+			println("Installing local tools...")
 			shell(filepath.Join(directories.scripts, "install_local_tools.sh"))
+		}
+
+		if installCITools {
+			println("Installing ci tools...")
 		}
 	},
 }
