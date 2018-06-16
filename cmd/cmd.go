@@ -50,4 +50,7 @@ func init() {
 	rootCmd.AddCommand(createCmd)
 	rootCmd.AddCommand(generateCmd)
 	rootCmd.AddCommand(installCmd)
+
+	// Internal commands
+	rootCmd.AddCommand(docsCmd)
 }

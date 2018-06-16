@@ -14,6 +14,7 @@ const (
 var directories = struct {
 	root    string
 	bin     string
+	docs    string
 	scripts string
 }{}
 
@@ -38,5 +39,6 @@ func getRootDirectory() string {
 func init() {
 	directories.root = getRootDirectory()
 	directories.bin = filepath.Join(directories.root, "bin")
+	directories.docs = filepath.Join(directories.root, "docs")
 	directories.scripts = filepath.Join(directories.root, "scripts")
 }
