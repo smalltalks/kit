@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  name = "github.com/briandowns/spinner"
+  packages = ["."]
+  revision = "48dbb65d7bd5c74ab50d53d04c949f20e3d14944"
+  version = "1.0"
+
+[[projects]]
   name = "github.com/fatih/color"
   packages = ["."]
   revision = "5b77d2a35fb0ede96d138fc9a99f5c9b6aef11b4"
@@ -46,6 +52,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b9f7a57338e8e7d33117bd1d1a32d0fb2b334090b2b20fceb5a8c5efa7d2f44c"
+  inputs-digest = "9b403c4a749c3827de0754c8498e49bd2d4416b1d7cecbf31f8d3e029a8ddd65"
   solver-name = "gps-cdcl"
   solver-version = 1
