@@ -10,3 +10,6 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+# Vendor contains the dependencies for kit should be installed when needed
+vendor/
